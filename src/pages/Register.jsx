@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // 👈 On ajoute Link ici
 import "../Style/Register.css";
 
 const Register = ({ setAge, setPseudo }) => {
-  // 1. On prépare un objet qui contient exactement ce que SQL attend
   const [formData, setFormData] = useState({
     pseudo: "",
     email: "",
     password: "",
-    date_naissance: "", // On utilise le même nom que dans ta BDD
+    date_naissance: "",
   });
 
   const navigate = useNavigate();
 
-  // Fonction pour mettre à jour les champs du formulaire
+  // On utilise la variable d'environnement pour Vercel
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,8 +23,7 @@ const Register = ({ setAge, setPseudo }) => {
     e.preventDefault();
 
     try {
-      // 2. Envoi au serveur (port 5000)
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch(`${SERVER_URL}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,21 +34,16 @@ const Register = ({ setAge, setPseudo }) => {
       const data = await response.json();
 
       if (response.ok) {
-        // 3. Mise à jour des infos globales dans App.jsx
         setPseudo(formData.pseudo);
-        // On n'envoie plus juste un chiffre, mais la date
         setAge(formData.date_naissance);
-
         alert(`Bienvenue sur Safe World, ${formData.pseudo} ! 🌿`);
-        navigate("/");
+        navigate("/login"); // On redirige vers le login après l'inscription
       } else {
         alert("Oups : " + (data.message || "Impossible de créer le compte."));
       }
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
-      alert(
-        "Le serveur ne répond pas. Vérifie que le serveur Node est lancé !",
-      );
+      alert("Le serveur ne répond pas. Vérifie ta connexion !");
     }
   };
 
@@ -56,7 +51,9 @@ const Register = ({ setAge, setPseudo }) => {
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Rejoindre Safe World 🌿</h2>
-        <p>Crée ton compte pour partager en toute sécurité.</p>
+        <p style={{ color: "var(--text-main)" }}>
+          Crée ton compte pour partager en toute sécurité.
+        </p>
 
         <input
           type="text"
@@ -83,20 +80,20 @@ const Register = ({ setAge, setPseudo }) => {
           required
         />
 
-        {/* SECTION DATE DE NAISSANCE */}
         <label
           style={{
             fontSize: "14px",
-            color: "#718096",
+            color: "var(--text-main)",
             alignSelf: "flex-start",
             marginLeft: "10%",
+            opacity: 0.8,
           }}
         >
           Ta date de naissance :
         </label>
         <input
           type="date"
-          name="date_naissance" // Doit correspondre à la clé dans formData
+          name="date_naissance"
           value={formData.date_naissance}
           onChange={handleChange}
           required
@@ -104,14 +101,22 @@ const Register = ({ setAge, setPseudo }) => {
 
         <button type="submit">S'inscrire</button>
 
-        <p className="login-link">
+        {/* --- LE LIEN VERS LOGIN --- */}
+        <p
+          className="login-link"
+          style={{ color: "var(--text-main)", marginTop: "15px" }}
+        >
           Déjà inscrit ?{" "}
-          <span
-            onClick={() => navigate("/login")}
-            style={{ cursor: "pointer", color: "#38a169" }}
+          <Link
+            to="/login"
+            style={{
+              color: "#38a169",
+              fontWeight: "bold",
+              textDecoration: "none",
+            }}
           >
             Se connecter
-          </span>
+          </Link>
         </p>
       </form>
     </div>
