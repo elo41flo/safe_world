@@ -1,0 +1,50 @@
+/* Conteneur principal de la page */
+.home-page {
+  display: flex;
+  flex-direction: column; /* On empile le Header sur le reste */
+  min-height: 100vh;
+  background-color: #f7fafc; /* Gris très clair pour faire ressortir les blocs blancs */
+}
+
+/* Le conteneur sous le Header qui sépare Sidebar et Main */
+.home-content {
+  display: flex;
+  width: 100%;
+  max-width: 1400px; /* On limite la largeur pour les grands écrans */
+  margin: 0 auto;    /* On centre l'application */
+}
+
+/* Zone du contenu principal */
+main {
+  flex: 1;           /* Prend tout l'espace restant à droite de la Sidebar */
+  padding: 30px;
+  background-color: #f9f9f9;
+  min-height: calc(100vh - 70px); /* Hauteur totale moins le Header */
+}
+
+/* Style du titre du fil d'actualité */
+main h2 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  font-weight: 700;
+  border-bottom: 2px solid #38a169; /* Petit trait vert sous le titre */
+  display: inline-block;
+  padding-bottom: 5px;
+  margin-bottom: 25px;
+}
+
+/* Responsive : sur mobile, on cache la sidebar ou on l'adapte */
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column; /* Sidebar passe au dessus du Feed ou disparaît */
+  }
+  
+  nav {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    top: 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid #ddd;
+  }
+}

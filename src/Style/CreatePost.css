@@ -1,0 +1,85 @@
+/* Le conteneur du formulaire */
+form {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0 !important; /* On remplace ton #ddd par un gris plus doux */
+  padding: 20px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+form h3 {
+  margin-top: 0;
+  color: #2d3748;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* Les champs de texte et textarea */
+form input[type="text"], 
+form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box; /* Évite que le champ dépasse */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form input:focus, 
+form textarea:focus {
+  outline: none;
+  border-color: #38a169;
+  box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.1);
+}
+
+/* Le sélecteur de Mood */
+form select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e0;
+  background-color: #f8fafc;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Le bouton de publication */
+form button[type="submit"] {
+  background-color: #38a169;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  margin-top: 5px;
+}
+
+form button[type="submit"]:hover {
+  background-color: #2f855a;
+}
+
+form button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+.upload-btn {
+  background-color: #edf2f7;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  border: 1px solid #cbd5e0;
+  transition: all 0.2s;
+}
+
+.upload-btn:hover {
+  background-color: #e2e8f0;
+  border-color: #a0aec0;
+}

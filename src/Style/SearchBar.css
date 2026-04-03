@@ -1,0 +1,50 @@
+.search-container {
+  position: relative; /* Indispensable pour que .search-results se place dessous */
+  width: 100%;
+  max-width: 250px;
+  margin: 10px 0;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+  background-color: #f0f2f5;
+}
+
+.search-results {
+  position: absolute; /* Sort la liste du flux pour la mettre "devant" */
+  top: 100%; /* Juste sous l'input */
+  left: 0;
+  width: 100%;
+  background-color: white; /* Fond blanc forcé */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Force l'affichage au-premier plan */
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-results li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #333; /* Couleur de texte foncée pour être sûr de la voir */
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+}
+
+.search-results li:hover {
+  background-color: #e2e8f0;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
+}

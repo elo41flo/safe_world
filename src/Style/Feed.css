@@ -1,0 +1,39 @@
+/* Le conteneur qui englobe le formulaire et les posts */
+.feed-container {
+  max-width: 700px; /* Largeur idéale pour la lecture sur écran */
+  margin: 0 auto;   /* Centre le flux */
+  padding: 20px;
+}
+
+/* Espacement entre le formulaire et le premier post */
+.feed-container > div:first-of-type {
+  margin-bottom: 20px;
+}
+
+/* Message quand il n'y a pas de posts */
+.no-posts-message {
+  text-align: center;
+  padding: 40px;
+  background-color: white;
+  border-radius: 12px;
+  color: #718096;
+  border: 2px dashed #e2e8f0;
+  font-style: italic;
+}
+
+/* Animation à l'apparition d'un nouveau post */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* On applique l'animation sur les articles (les Posts) */
+article {
+  animation: slideIn 0.3s ease-out;
+}

@@ -1,0 +1,66 @@
+/* --- CONFIGURATION DES THÈMES --- */
+:root, [data-theme='light'] {
+  --bg-color: #ffffff;
+  --card-bg: #f8f9fa;
+  --text-main: #1a202c;
+  --sidebar-bg: #f1f3f5;
+  --accent-color: #38a169;
+}
+
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-main: #ffffff;
+  --sidebar-bg: #000000;
+  --accent-color: #48bb78;
+}
+
+[data-theme='tech'] {
+  --bg-color: #0d0d0d;
+  --card-bg: #1a1a1a;
+  --text-main: #00ff41;
+  --sidebar-bg: #050505;
+  --accent-color: #00ff41;
+}
+
+[data-theme='cyber'] {
+  --bg-color: #2b0040;
+  --card-bg: #3d005c;
+  --text-main: #ffee00;
+  --sidebar-bg: #1a0026;
+  --accent-color: #ffee00;
+}
+
+/* --- APPLICATION GLOBALE --- */
+body, #root {
+  background-color: var(--bg-color) !important;
+  color: var(--text-main) !important;
+  min-height: 100vh;
+  margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, p, span {
+  color: var(--text-main);
+}
+
+.app-container {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.main-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: var(--sidebar-bg); /* Utilise la variable ! */
+  color: var(--text-main);
+  transition: 0.3s;
+}

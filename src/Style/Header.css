@@ -1,0 +1,84 @@
+header {
+  display: flex;
+  justify-content: space-between; /* Espace entre logo, recherche et profil */
+  align-items: center;            /* Aligne tout verticalement au milieu */
+  padding: 0 20px;
+  height: 70px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Petite ombre légère */
+  position: sticky;
+  top: 0;
+  z-index: 1000;                  /* Pour qu'il passe au-dessus des posts au scroll */
+}
+
+/* Style du Logo */
+header img {
+  height: 45px;                   /* Garde une taille cohérente pour ton logo Safe.png */
+  cursor: pointer;
+}
+
+/* Barre de recherche */
+header input {
+  width: 350px;
+  padding: 10px 20px;
+  border-radius: 20px;            /* Bords bien arrondis pour le côté "Safe/Amical" */
+  border: 1px solid #e2e8f0;
+  background-color: #f7fafc;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+header input:focus {
+  border-color: #38a169;          /* Vert quand on clique dedans */
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.1);
+}
+
+/* Zone Profil / Notifications */
+header div {
+  display: flex;
+  gap: 20px;                      /* Espace entre Notifications et Mon profil */
+  align-items: center;
+}
+
+header span {
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+header span:hover {
+  color: #38a169;                 /* Survol en vert */
+}
+
+.notification-wrapper {
+  position: relative; /* Indispensable pour placer le badge par rapport à la cloche */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.notification-badge {
+  background-color: #e53e3e; /* Rouge "danger" */
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%; /* Pour faire un cercle */
+  position: absolute;
+  top: -8px;  /* Ajuste selon ton logo */
+  right: -5px;
+  border: 2px solid var(--bg-color); /* Un petit contour de la couleur du thème pour faire propre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  height: 15px;
+}
+
+/* On change la couleur au survol pour le feedback */
+.notification-link:hover {
+  opacity: 0.8;
+}

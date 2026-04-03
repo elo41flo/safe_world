@@ -1,0 +1,113 @@
+/* 1. Structure globale */
+.messages-page { 
+  display: flex; 
+  height: 80vh; 
+  background: white; 
+  border-radius: 12px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+}
+
+/* 2. Liste des contacts (à gauche) */
+.contacts-list { 
+  width: 30%; 
+  border-right: 1px solid #eee; 
+  padding: 20px; 
+  background: #f9fafb; 
+}
+
+.contact-item { 
+  padding: 10px; 
+  cursor: pointer; 
+  border-radius: 8px; 
+  margin-bottom: 5px; 
+  display: flex;
+  align-items: center;
+}
+
+.contact-item.active { 
+  background: #38a169; 
+  color: white; 
+}
+
+/* 3. Fenêtre de chat (à droite) */
+.chat-window { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; /* Correction : flex-direction au lieu de flexDirection */
+  padding: 20px; 
+  background-color: #f9f9f9;
+}
+
+.messages-display { 
+  flex: 1; 
+  overflow-y: auto; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  padding: 10px; 
+}
+
+/* 4. LES BULLES DE MESSAGES */
+
+/* 📍 Le Wrapper : C'est lui qui gère l'alignement GAUCHE / DROITE */
+.message-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.message-wrapper.sent {
+  justify-content: flex-end; /* Pousse à droite */
+}
+
+.message-wrapper.received {
+  justify-content: flex-start; /* Laisse à gauche */
+}
+
+/* La Bulle elle-même */
+.message-bubble {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Style spécifique ENVOYÉ (Vert) */
+.sent .message-bubble {
+  background-color: #38a169;
+  color: white;
+  border-bottom-right-radius: 2px;
+}
+
+/* Style spécifique REÇU (Gris) */
+.received .message-bubble {
+  background-color: #e2e8f0;
+  color: #2d3748;
+  border-bottom-left-radius: 2px;
+}
+
+/* 5. Formulaire d'envoi */
+.message-form { 
+  display: flex; 
+  gap: 10px; 
+  margin-top: 20px; 
+}
+
+.message-form input { 
+  flex: 1; 
+  padding: 12px; 
+  border: 1px solid #ddd; 
+  border-radius: 20px; 
+  outline: none;
+}
+
+.message-form button {
+  background-color: #38a169;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
