@@ -3,7 +3,7 @@ import "../Style/parametres.css";
 import "../App.css";
 
 const Parametres = ({ userId, setTheme, currentTheme }) => {
-  const SERVER_URL = "http://localhost:5000";
+  const SERVER_URL = "https://safe-world-back.vercel.app/";
 
   const changeTheme = (newTheme) => {
     setTheme(newTheme);
