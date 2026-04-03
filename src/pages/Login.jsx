@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // 👈 On importe Link ici
 
-// 📍 On ajoute setUserId dans les props ici
 const Login = ({ setAge, setPseudo, setUserId }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  // On récupère l'URL de l'API via les variables d'environnement
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch(`${SERVER_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -19,17 +21,11 @@ const Login = ({ setAge, setPseudo, setUserId }) => {
       const data = await response.json();
 
       if (response.ok) {
-        // 🚀 CRITIQUE : On met à jour l'ID global de l'utilisateur
-        // On récupère data.user.id qui vient de ton serveur (SQL)
         setUserId(data.user.id);
-
-        // Bonus : On le stocke dans le localStorage pour ne pas être déconnecté au refresh
         localStorage.setItem("userId", data.user.id);
-
         setAge(data.user.age);
         setPseudo(data.user.pseudo);
-
-        navigate("/"); // Retour à l'accueil
+        navigate("/");
       } else {
         alert(data.message);
       }
@@ -57,6 +53,27 @@ const Login = ({ setAge, setPseudo, setUserId }) => {
           required
         />
         <button type="submit">Se connecter</button>
+
+        {/* --- AJOUT DU LIEN VERS L'INSCRIPTION --- */}
+        <p
+          style={{
+            marginTop: "15px",
+            textAlign: "center",
+            color: "var(--text-main)",
+          }}
+        >
+          Pas encore de compte ?{" "}
+          <Link
+            to="/register"
+            style={{
+              color: "#38a169",
+              fontWeight: "bold",
+              textDecoration: "none",
+            }}
+          >
+            Inscris-toi ici !
+          </Link>
+        </p>
       </form>
     </div>
   );
