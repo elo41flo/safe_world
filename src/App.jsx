@@ -8,13 +8,14 @@ import Login from "./pages/Login";
 import Messages from "./pages/Messages";
 import Profil from "./pages/Profil";
 import EspaceParent from "./pages/EspaceParent";
-import Parametres from "./pages/parametres";
+import Parametres from "./pages/Parametres"; // ✅ P Majuscule ici !
 import CreatePost from "./components/CreatePost";
 
 function App() {
-  const SERVER_URL = "http://localhost:5000";
+  // On utilise les variables d'environnement pour Vercel
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
 
-  // 1. États globaux (Auth & Profil)
+  // 1. États globaux
   const [userId, setUserId] = useState(
     () => Number(localStorage.getItem("userId")) || null,
   );
@@ -24,22 +25,18 @@ function App() {
   const [userName, setUserName] = useState(
     () => localStorage.getItem("userName") || "Invité",
   );
-
-  // 2. Gestion du Thème
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "light",
   );
-
-  // 3. État des VRAIES Notifications
   const [notifications, setNotifications] = useState([]);
 
-  // --- EFFET : Application du Thème ---
+  // 2. Application du Thème
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // --- EFFET : Récupération des notifications depuis l'API ---
+  // 3. Récupération des notifications
   useEffect(() => {
     if (userId) {
       const fetchNotifications = async () => {
@@ -50,17 +47,15 @@ function App() {
             setNotifications(data);
           }
         } catch (err) {
-          console.error("Erreur chargement notifications:", err);
+          console.error("Erreur notifications:", err);
         }
       };
-
       fetchNotifications();
-      const interval = setInterval(fetchNotifications, 30000); // Check toutes les 30s
+      const interval = setInterval(fetchNotifications, 30000);
       return () => clearInterval(interval);
     }
-  }, [userId]);
+  }, [userId, SERVER_URL]);
 
-  // --- FONCTION : Marquer une notification comme lue ---
   const markAsRead = async (id) => {
     try {
       await fetch(`${SERVER_URL}/api/notifications/${id}/read`, {
@@ -74,7 +69,6 @@ function App() {
     }
   };
 
-  // Calcul du nombre de non-lus pour le Header
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
@@ -82,12 +76,12 @@ function App() {
       className="app-layout"
       style={{ display: "flex", minHeight: "100vh", width: "100vw" }}
     >
+      {/* ✅ LA SIDEBAR EST ICI (FIXE ET UNIQUE) */}
       <aside style={{ width: "260px", flexShrink: 0 }}>
-        <Sidebar age={userAge} />
+        <Sidebar age={userAge} userId={userId} />
       </aside>
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* On passe le compteur au Header pour la pastille rouge */}
         <Header currentUser={userName} unreadCount={unreadCount} />
 
         <main
@@ -127,7 +121,6 @@ function App() {
                 />
               }
             />
-
             <Route
               path="/profil"
               element={
@@ -149,7 +142,6 @@ function App() {
               }
             />
 
-            {/* Page Messages avec les vraies notifications et la fonction markAsRead */}
             <Route
               path="/messages"
               element={
@@ -171,6 +163,7 @@ function App() {
                 />
               }
             />
+
             <Route path="/conseils" element={<Conseils />} />
             <Route
               path="/espace-parent"
