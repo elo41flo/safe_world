@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Messages from "./pages/Messages";
 import Profil from "./pages/Profil";
 import EspaceParent from "./pages/EspaceParent";
-import Parametres from "./pages/Parametres";
+import Parametres from "./pages/parametres";
 import CreatePost from "./components/CreatePost";
 
 function App() {
