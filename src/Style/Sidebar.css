@@ -87,3 +87,25 @@ nav ul li:has(a[href="/espace-parent"]) a:hover {
   display: flex;
   flex-direction: column;
 }
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #ff4d4d; /* Rouge pour le danger/déconnexion */
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  padding: 10px 0;
+  font-family: inherit;
+  display: block;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+.login-link {
+  color: var(--accent-color);
+  font-weight: bold;
+}
